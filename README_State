@@ -1,0 +1,7 @@
+16/02/2018:
+-- Logra activar la thread, pero al desmarcar le check box se bloquea la ventan (Main Window) 
+la interrupcion reset si funcionaba.
+-- Para cancelarla se usa wait() no funciona y terminate() funciona pero no se puede
+re-activar la thread
+-- La velocidad del movimiento con los botones es lenta
+-- En version anterior no era un ciclo infinito y funcionaba con terminate() chequea eso
