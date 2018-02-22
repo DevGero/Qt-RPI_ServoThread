@@ -34,7 +34,7 @@ To build:
 
 To run it needs to be as root user to be able to access the PWM.
 
-    sudo ./QwtExample
+    sudo ./Servo_Butons_Threads
 
 Possible trouble
 ----------------
@@ -42,3 +42,5 @@ Possible trouble
 If it screen an error of not been able to access the interface resources type:
 
     sudo cp /home/pi/.Xauthority /root
+
+and try again.
