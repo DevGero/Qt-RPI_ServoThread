@@ -54,13 +54,6 @@
        </widget>
       </item>
       <item>
-       <widget class="QLabel" name="lbl_MotorPos">
-        <property name="text">
-         <string>MotorPos: </string>
-        </property>
-       </widget>
-      </item>
-      <item>
        <widget class="QPushButton" name="pBtn_exit">
         <property name="text">
          <string>Close</string>

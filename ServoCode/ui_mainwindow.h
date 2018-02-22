@@ -36,7 +36,6 @@ public:
     QLabel *label;
     QDial *dial_angle;
     QCheckBox *cBx_controlPass;
-    QLabel *lbl_MotorPos;
     QPushButton *pBtn_exit;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
@@ -77,11 +76,6 @@ public:
 
         verticalLayout->addWidget(cBx_controlPass);
 
-        lbl_MotorPos = new QLabel(centralWidget);
-        lbl_MotorPos->setObjectName(QStringLiteral("lbl_MotorPos"));
-
-        verticalLayout->addWidget(lbl_MotorPos);
-
         pBtn_exit = new QPushButton(centralWidget);
         pBtn_exit->setObjectName(QStringLiteral("pBtn_exit"));
 
@@ -112,7 +106,6 @@ public:
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", Q_NULLPTR));
         label->setText(QApplication::translate("MainWindow", "Motor A. current angle: 90", Q_NULLPTR));
         cBx_controlPass->setText(QApplication::translate("MainWindow", "Pass Control to Buttons", Q_NULLPTR));
-        lbl_MotorPos->setText(QApplication::translate("MainWindow", "MotorPos: ", Q_NULLPTR));
         pBtn_exit->setText(QApplication::translate("MainWindow", "Close", Q_NULLPTR));
     } // retranslateUi
 

@@ -27,7 +27,6 @@ MainWindow::MainWindow(QWidget *parent) :
 //Buttons Thread realted
     btnThread = new ButtonsThread();
     connect(btnThread,SIGNAL(keyrelease()),this,SLOT(on_keyRelease()));
-//    connect(btnThread,SIGNAL(finished()),this,SLOT(deleteLater())); //Not sure about this line because I want to try to make it sleep and go back and so on, not just run ones
     btnThread->setParent(this);
 }
 
@@ -45,7 +44,6 @@ void MainWindow::on_dial_angle_valueChanged(int value)
     MotorPos = value;
     mutex.unlock();
 
-    ui->lbl_MotorPos->setText("MotorPos: " + QString::number(MotorPos));    
     ui->label->setText("Motor A: angle: "+ QString::number(value) +" degrees");
 }
 
@@ -58,28 +56,29 @@ void ButtonsThread::run(){
     while(BtnFlag){
         if(digitalRead(BUTTON_LEFT)){
                 digitalWrite(LED, 1);
-                delay(500);
-                digitalWrite(LED, 0);
+                delay(5);
 
-                mutex.lock();
-                MotorPos+=5;
-                mutex.unlock();
+                if (MotorPos < 180){
+                    mutex.lock();
+                    MotorPos++;
+                    mutex.unlock();
+                }
                 setMotorPosition(MotorPos);
-
         }
         if(digitalRead(BUTTON_RIGHT)){
-
                 digitalWrite(LED, 1);
-                delay(250);
-                digitalWrite(LED, 0);
+                delay(5);
 
-                mutex.lock();
-                MotorPos-=5;
-                mutex.unlock();
+                if (MotorPos > 0){
+                    mutex.lock();
+                    MotorPos--;
+                    mutex.unlock();
+                }
                 setMotorPosition(MotorPos);
         }
-    }//and while
-emit keyrelease();
+        digitalWrite(LED, 0);
+    }//and while    
+    emit keyrelease();
 }
 
 void MainWindow::on_keyRelease(){
@@ -88,23 +87,12 @@ void MainWindow::on_keyRelease(){
 }
 
 void resetPositionISR(){
-/*Here goes the code for reset actions */
-
     setMotorPosition(RESET_POS);
     QApplication::quit();
 }
 
-/*void MainWindow::on_cBx_controlPass_clicked(bool checked)
-{
-    if(checked){
-        btnThread->start();
-    }
-    else{
-        btnThread->terminate();
-    }
-}*/
+void setMotorPosition(int value){    
 
-void setMotorPosition(int value){
     int pos = (int)(value*170/180+50);
     pwmWrite(PWM_NUMBER,pos);
 }
